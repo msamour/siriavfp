@@ -1,0 +1,55 @@
+CLOSE DATABASES
+set default to j:\wapps9\digicel\inv\tablas
+idowner='ZinterCODE'
+open data inven shar
+set cent on
+set date to brit
+set dele on
+set stat on
+SET ENGINEBEHAVIOR 70
+sele 1
+open data inven shar
+m.nudoc='0903000063'
+m.nudoc2='0900000192'
+m.bodent='0900'
+m.bodsal='0903'
+SELECT 1
+USE inemov SHARED
+SET filter to nudoc=m.nudoc AND codtmo= 'ET'
+*BROWSE noed
+IF !EMPTY(nudoc)
+	m.statuto = 'bueno'
+	**Reverso el encabezado
+	COPY TO c:\exportar\encabeza
+	SELECT 2 
+	USE c:\exportar\encabeza
+	
+	REPLACE nudoc WITH m.nudoc2
+	REPLACE codtmo WITH 'ST'
+	REPLACE codbod WITH m.bodent
+	REPLACE codbodd WITH m.bodsal
+*	BROWSE NOEDIT 
+	**Importamos el encabezado reversado
+	SELECT 1
+	APPEND FROM c:\exportar\encabeza
+	**Reverso el detalle
+	SELECT 2
+	USE
+	SELECT 1
+	USE
+	USE inmov SHARED
+	SET FILTER TO nudoc = m.nudoc
+	COPY To c:\exportar\detalle
+	SELECT 2
+	USE c:\exportar\detalle
+	**BROWSE noed
+	REPLACE ALL nudoc WITH m.nudoc2
+	REPLACE ALL codtmo WITH 'ST'
+	REPLACE ALL codbod WITH m.bodent
+	**REPLACE codbodd WITH m.bodsal
+*	BROWSE NOEDIT 
+	SELECT 1
+	APPEND FROM c:\exportar\detalle
+ELSE
+	m.statuto = 'malo'	
+endif

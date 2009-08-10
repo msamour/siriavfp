@@ -1,0 +1,19 @@
+set default to j:\wapps9\digicel\inv\tablas
+idowner='ZinterCODE'
+open data inven shared
+set date to brit
+SET DELETED ON 
+SET ENGINEBEHAVIOR 70
+sele 1
+use inmov shared
+sele 2
+use inbod shared
+sele 3
+use inprod shared
+SELECT a.fecha, c.desprod,SUM(a.cantidad) as terminal ,a.codsubuni , a.codbod as codtienda, c.codlin, a.nudoc; 
+FROM inmov as a, inbod as b, inprod as c, inemov as d; 
+WHERE a.codbod=b.codbod and a.codprod = c.codprod and a.nudoc=d.nudoc AND;
+a.codtmo='S2' and a.CODTCOMVTA > '02' AND;
+a.FECHA >= CTOD('01/12/2008') AND a.fecha <= CTOD('31/12/2008') AND CODZONA = '002' and codlin <> '0601'; 
+GROUP BY a.fecha, a.codprod;
+ORDER BY a.fecha

@@ -1,0 +1,15 @@
+SELECT DISTINCT Inmov.fecha, Inmov.codprod, Inmov.valor, Inmov.codbod,;
+  Inprod.desprod, Inprod.codlin, Inmov.nudoc, COUNT(Inmov.codprod);
+ FROM ;
+     inven!inmov ;
+    INNER JOIN inven!inprod ;
+   ON  Inmov.codprod = Inprod.codprod ;
+    INNER JOIN inven!inemov ;
+   ON  Inmov.nudoc = Inemov.nudoc;
+ WHERE (  Inmov.codtmo = ( "S2" );
+   AND  Inmov.valor > 0;
+   AND  Inprod.codlin = ( "0101" ) );
+   OR  (  Inprod.codlin = "0401";
+   AND  Inemov.codtcomvta = "01" );
+ GROUP BY Inmov.fecha, Inmov.codprod;
+ ORDER BY Inmov.fecha

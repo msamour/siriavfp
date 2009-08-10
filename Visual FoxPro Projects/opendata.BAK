@@ -1,0 +1,18 @@
+set default to j:\wapps9\digicel\inv\tablas
+idowner='ZinterCODE'
+ 
+SET ENGINEBEHAVIOR 70
+SET DELETED ON
+SET CENTURY on
+SET STATUS ON
+SET TALK ON
+SET DATE TO brit
+
+OPEN DATABASE inven SHARED
+SELECT 1
+USE inemov SHARED
+SELECT 2
+USE inmov SHARED
+
+*SELECT disti fecha FROM inemov WHERE puntofac = '002'GROUP BY fecha
+SELlect disti nudoc, fecha ,codcli, imei, imef, nutelef 
